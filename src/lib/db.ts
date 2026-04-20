@@ -6,7 +6,8 @@ const connectionString = process.env.DATABASE_URL!;
 
 const client = postgres(connectionString, {
   prepare: false,
-  ssl: "require",
+  ssl: { rejectUnauthorized: false },
+  connect_timeout: 15,
 });
 
 export const db = drizzle(client, { schema });
